@@ -40,11 +40,11 @@ $(foreach file,$(1), \
   $(eval include $(CLEAR_VARS)) \
   $(eval LOCAL_SRC_FILES := $(file)) \
   $(eval LOCAL_C_INCLUDES := $(libastl_test_includes)) \
-  $(eval LOCAL_MODULE := $(notdir $(file:%.cpp=%))$(5)) \
+  $(eval LOCAL_MODULE := $(notdir $(file:%.cpp=%))) \
   $(eval LOCAL_CFLAGS += $(4)) \
   $(eval LOCAL_STATIC_LIBRARIES := $(libastl_test$(5)_static_lib)) \
   $(eval LOCAL_MODULE_TAGS := $(2) ) \
-  $(eval $(if $(3),,LOCAL_MODULE_PATH := $(TARGET_OUT_DATA_APPS))) \
+  $(eval $(if $(3),,LOCAL_MODULE_PATH := $(TARGET_OUT_SYSTEM_BIN))) \
   $(eval include $(BUILD_$(3)EXECUTABLE)) \
 )
 endef
@@ -56,7 +56,7 @@ $(call _define-test,$(1),eng,HOST_,-O0 -g,_host)
 endef
 endif
 
-define target-test
+define device-test
 $(call _define-test,$(1),eng tests)
 endef
 
